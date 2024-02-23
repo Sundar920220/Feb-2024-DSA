@@ -1,0 +1,37 @@
+Problem Description: Given an expression string A, examine whether the pairs and the orders of “{“,”}”, ”(“,”)”, ”[“,”]” are correct in A.
+
+Soln :
+
+public class Solution {
+    public int solve(String A) {
+        int n=A.length();
+        Stack<Character>st=new Stack<>();
+        HashMap<Character,Character>hM=new HashMap<>();
+        hM.put(')','(');
+        hM.put('}','{');
+        hM.put(']','[');
+        for(int i=0;i<n;i++){
+            char C=A.charAt(i);
+            if(hM.containsKey(C)){
+                if(!st.isEmpty() && hM.get(C).equals(st.peek())){
+                    st.pop();
+                }
+                else{
+                    return 0;
+                }
+            }
+            else{
+                st.push(C);
+            }
+        }
+        if(!st.isEmpty()){
+            return 0;
+        }
+        else{
+            return 1;
+        }
+
+    }
+}
+
+
